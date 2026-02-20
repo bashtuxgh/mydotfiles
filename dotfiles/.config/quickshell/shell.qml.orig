@@ -61,6 +61,18 @@ PanelWindow {
         Component.onCompleted: running = true
     }
 
+    // Update your timer to run all processes
+    Timer {
+        interval: 1000
+        running: true
+        repeat: true
+        onTriggered: {
+            cpuProc.running = true
+            memProc.running = true
+            onTriggered: clock.text = Qt.formatDateTime(new Date(), "ddd, MMM dd - HH:mm:ss")
+        }
+    }
+
     anchors.top: true
     anchors.left: true
     anchors.right: true
@@ -117,15 +129,4 @@ PanelWindow {
         }
     }
 
-    // Update your timer to run all processes
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: {
-            cpuProc.running = true
-            memProc.running = true
-            onTriggered: clock.text = Qt.formatDateTime(new Date(), "ddd, MMM dd - HH:mm:ss")
-        }
-    }
 }
